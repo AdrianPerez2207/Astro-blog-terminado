@@ -1,0 +1,26 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import {siteConfig} from "../../config/site-config";
+import AuthorCard from "../../components/AuthorCard.astro";
+import {getCollection} from "astro:content";
+
+//Recuperamos la colección entera de los autores
+const authors = await getCollection('author');
+---
+
+<MainLayout title="Adrian's Blog">
+    <section>
+        <h1
+                class="text-3xl font-semibold capitalize lg:text-4xl text-white"
+        >
+            {siteConfig.title}
+        </h1>
+        <a class="text-white" href="/">Regresar</a>
+    </section>
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+
+        <!--Author card-->
+        {authors.map((auth) => <AuthorCard author={auth} />)}
+
+    </section>
+</MainLayout>
